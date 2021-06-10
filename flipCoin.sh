@@ -2,20 +2,33 @@
 
 hedcount=0
 tailcount=0
-i=0
-while((i<=10))
+while true
 do
 	win=$((RANDOM%2))
 
 	if(($win==1))
 	then
 		hedcount=$((hedcount+1))
-		echo heads is winner
+		if(($hedcount==21))
+		then
+			break
+		fi
 	else
 		tailcount=$((tailcount+1))
-		echo Tail is winner
+		if(($tailcount==21))
+		then
+			break
+		fi
+
 	fi
-	((i++))
 done
-echo hedcount $hedcount
-echo tailcount $tailcount
+
+if(($hedcount>$tailcount))
+	then
+	echo headwins by $(($hedcount-$tailcount))
+elif(($hedcount<$tailcount))
+	then
+	echo tailwins by $(($tailcount-$hedcount))
+else
+	echo Tie
+fi
